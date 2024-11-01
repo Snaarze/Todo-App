@@ -1,3 +1,3 @@
 import "./styles.css"
 
-console.log("Hello Odinite")
+console.log("Hello Odinite");

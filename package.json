@@ -4,8 +4,8 @@
   "description": "Todo App By Odin Projects",
   "main": "webpack.config.js",
   "scripts": {
-    "build": "webpack",
-    "dev": "webpack serve",
+    "build": "webpack --config webpack.prod.js",
+    "start": "webpack serve --open --config webpack.dev.js",
     "deploy": "git subtree push --prefix dist origin gh-pages"
   },
   "keywords": [],
