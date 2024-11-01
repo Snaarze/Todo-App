@@ -5,21 +5,37 @@ module.exports = {
   entry: {
     app: './src/App/index.js',
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: 'Todo',
-    }),
-  ],
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      Title : "Todo",
+      template : "./src/App/index.html",
+    }),
+  ],
   module: {
     rules: [
         {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    "postcss-preset-env",
+                  ],
+                ],
+              },
+            },
+          },
+        ],
         },
         {
         test: /\.html$/i,

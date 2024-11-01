@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="grid grid-cols-[1fr_5fr] w-screen h-screen">
+            <div class="flex flex-col items-center border-r border-gray-200 shadow-2xl">
+                <h1 class="font-bold text-3xl my-[1rem]">Project List</h1>
+                <ul>
+                    <li class="flex gap-2">
+                       <span> Project 1</span>
+                       <button class="bg-green py-1 px-3 text-sm text-white">Edit</button>
+                       <button class="bg-red p-1 text-sm text-white">Delete</button>
+                    </li>
+                </ul>
+            </div>
+            <div class=""></div>
+        </div>
+    </body>
 </html>
