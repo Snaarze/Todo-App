@@ -1,23 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-    <body>
-        <div class="grid grid-cols-[1fr_5fr] w-screen h-screen">
-            <div class="flex flex-col items-center border-r border-gray-200 shadow-2xl">
-                <h1 class="font-bold text-3xl my-[1rem]">Project List</h1>
-                <ul>
-                    <li class="flex gap-2">
-                       <span> Project 1</span>
-                       <button class="bg-green py-1 px-3 text-sm text-white">Edit</button>
-                       <button class="bg-red p-1 text-sm text-white">Delete</button>
-                    </li>
-                </ul>
-            </div>
-            <div class=""></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://kit.fontawesome.com/401c9283dc.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="grid min-h-screen overflow-auto">
+      <div
+        class="fixed min-h-screen w-[16%] flex flex-col items-center border-r border-gray-200 shadow-2xl project-div"
+      >
+        <h1 class="font-bold text-3xl my-[1rem]">Todo List</h1>
+        <ul class="project-ul"></ul>
+        <div class="w-full h-8 flex justify-center items-center">
+          <button class="text-base add-btn">
+            <i class="fa-solid fa-plus text-base hover:text-xl"></i>
+          </button>
         </div>
-    </body>
+      </div>
+      <div
+        class="todo-list grid grid-cols-4 grid-flow-row-dense auto-rows-[200px] h-full gap-5 pl-80 pr-5 py-10"
+      ></div>
+    </div>
+
+    <dialog
+      class="dialogForm h-1/4 w-1/4 border border-gray-300 rounded-lg inset-x-0 inset-48 mx-auto bg-white flex-col text-justify"
+    >
+      <div
+        class="w-full bg-green h-10 relative rounded-t-lg justify-center items-center flex"
+      >
+        <button class="closeBtn text-white text-lg font-bold absolute right-2">
+          x
+        </button>
+        <p class="title-todo text-white font-bold"></p>
+      </div>
+      <p class="todoDescription"></p>
+      <p class="todoDue"></p>
+      <p class="todoPriority"></p>
+      <p class="todoNotes"></p>
+    </dialog>
+  </body>
 </html>

@@ -1,3 +1,5 @@
-import "./style.css"
-
-console.log("Hello Odinite");
+import "./style.css";
+import { todoView } from "./View/TodoView";
+(function App() {
+  todoView.initialLoadData();
+})();
