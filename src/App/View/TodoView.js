@@ -87,7 +87,6 @@ class TodoView {
   // display all the active all todo ists
   displayAllProjectList() {
     this.removeChildOfContainerList();
-    console.log(todo.getProjectArray());
 
     // this method or variable removes all the null todo to prevent errors of undefined properties such as id, title etc..
     const arrayMapped = todo
@@ -97,10 +96,14 @@ class TodoView {
 
     // run dynamically that depends on the length of the current array
     for (let i = 0; i < todo.getProjectArray().length; i++) {
+      console.log(arrayMapped[i]);
       // runs through occupied todos that create card for list of arrays
       for (let j = 0; j < arrayMapped[i].length; j++) {
         const card = document.createElement("div");
-        card.setAttribute("data-index", arrayMapped[i][j].id);
+
+        card.setAttribute("data-index", j);
+        card.setAttribute("project-index", i);
+
         card.classList.add(
           "border",
           `border-gray-300`,
@@ -114,7 +117,10 @@ class TodoView {
           "cursor-pointer",
           "relative"
         );
-        this.viewListDetailBtn(card, arrayMapped[i][j].id);
+        this.viewListDetailBtn(
+          card,
+          parseInt(card.getAttribute("project-index"))
+        );
         const todoTitle = document.createElement("p");
         todoTitle.classList.add("text-sm");
         todoTitle.textContent = arrayMapped[i][j].title;
@@ -201,7 +207,8 @@ class TodoView {
   }
 
   viewListDetails(element, index) {
-    console.log("clicked");
+    console.log(index);
+    console.log(element.getAttribute("data-index"));
     this.openDialogFunction();
     const array =
       todo.getProjectArray()[index ? index : 0].todo[
