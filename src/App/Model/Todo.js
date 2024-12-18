@@ -1,8 +1,7 @@
+import { getDataIndex } from "../Controller/TodoController";
 class Todo {
   constructor(projectName) {
     this.Storage = JSON.parse(localStorage.getItem("data"));
-    this.id =
-      this.Storage === null ? 0 : this.Storage[this.Storage.length - 1].id;
     this.projectName = projectName;
     this.projectArray = [
       {
@@ -59,6 +58,9 @@ class Todo {
         ],
       },
     ];
+    this.id = this.Storage
+      ? this.Storage[this.Storage.length - 1].id
+      : this.projectArray[this.projectArray.length - 1].id;
   }
   // render the data as initial
   renderData() {
@@ -81,6 +83,10 @@ class Todo {
     this.incrementProjectId();
     const project = new CreateTodo(this.id, projectName);
     this.projectArray.push(project);
+  }
+
+  getCurrentProjectId() {
+    return console.log(this.id);
   }
 
   // return the array

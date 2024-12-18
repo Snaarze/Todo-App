@@ -1,5 +1,3 @@
-import { todo } from "./Todo";
-
 class TodoList {
   constructor() {
     this.id = 0;
@@ -18,15 +16,17 @@ class TodoList {
   }
 
   updateCurrentId(index) {
-    let currentId = JSON.parse(localStorage.getItem("data"))[
-      index === undefined ? 0 : index
-    ];
-    let updatedId = currentId.todo[currentId.todo.length - 1].id;
-    return (this.id = updatedId);
+    let currentId = JSON.parse(localStorage.getItem("data"))[index ? index : 0];
+
+    if (currentId.todo.length === 0) {
+      this.id = 0;
+      return this.id;
+    }
+    this.id = currentId.todo[currentId.todo.length - 1].id;
+    return this.id;
   }
 
   createTodoList(title, description, dueDate, priority, notes, checklist) {
-    this.incrementIdList();
     const newList = new CreateList(
       this.id,
       prompt("Title"),

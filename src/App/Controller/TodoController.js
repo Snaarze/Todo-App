@@ -26,6 +26,7 @@ class TodoController {
     this.addProject();
     listController.addTodoListBtn();
     List.getCurrentId();
+    todo.getCurrentProjectId();
   }
 
   updateProject() {
@@ -55,6 +56,7 @@ class TodoController {
           const data =
             todo.getProjectArray()[findArrayId(getSpanIndex(event.target))]
               .todo;
+
           todoView.displayTodoList(data, index);
         }
       }
@@ -89,17 +91,17 @@ class TodoController {
   }
 }
 
-function getDataIndex(btn) {
+export function getDataIndex(btn) {
   return parseInt(
     btn.parentElement.previousElementSibling.getAttribute("data-index")
   );
 }
 
-function getSpanIndex(btn) {
+export function getSpanIndex(btn) {
   return parseInt(btn.getAttribute("data-index"));
 }
 
-function findArrayId(btn) {
+export function findArrayId(btn) {
   const array = todo.getProjectArray();
   return array.findIndex((data) => data.id === btn);
 }

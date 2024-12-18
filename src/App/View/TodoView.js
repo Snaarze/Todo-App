@@ -169,10 +169,9 @@ class TodoView {
         const todoDue = document.createElement("p");
         todoDue.textContent = element.dueDate;
         card.appendChild(todoDue);
-
-        List.selectedProject(index);
         this.htmlCache().todoContainerList.appendChild(card);
       });
+      List.selectedProject(index);
     }
 
     // create a add button everytime use click other projects
@@ -207,13 +206,13 @@ class TodoView {
   }
 
   viewListDetails(element, index) {
-    console.log(index);
-    console.log(element.getAttribute("data-index"));
+    const subArrayId = todo
+      .getProjectArray()
+      [index].todo.findIndex(
+        (data) => data.id === parseInt(element.getAttribute("data-index"))
+      );
     this.openDialogFunction();
-    const array =
-      todo.getProjectArray()[index ? index : 0].todo[
-        parseInt(element.getAttribute("data-index"))
-      ];
+    const array = todo.getProjectArray()[index ? index : 0].todo[subArrayId];
 
     this.htmlCache().title.textContent = `${!array ? 0 : array.title}`;
     this.htmlCache().description.textContent = `Description : ${array.description}`;
