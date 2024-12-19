@@ -11,7 +11,6 @@ class TodoListController {
       let index = parseInt(event.target.getAttribute("data-index"));
       array[index].todo.push(List.createTodoList());
       ControllerTodo.viewTodoList(index);
-      console.log(todo.getProjectArray());
     });
   }
 }

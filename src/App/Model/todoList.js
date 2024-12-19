@@ -27,6 +27,7 @@ class TodoList {
   }
 
   createTodoList(title, description, dueDate, priority, notes, checklist) {
+    this.incrementIdList();
     const newList = new CreateList(
       this.id,
       prompt("Title"),

@@ -43,22 +43,19 @@ class TodoController {
 
   viewTodoList(dataIndex) {
     todo.renderData();
-    todoView.displayTodoList(
-      todo.getProjectArray()[dataIndex ? dataIndex : 0].todo
-    );
+    console.log(dataIndex);
+    todoView.displayTodoList(todo.getProjectArray()[dataIndex].todo, dataIndex);
     // view the todo list depending on the selected row and fetch the todo List.
     todoView.htmlCache().containerList.addEventListener("click", (event) => {
       if (event.target.tagName === "SPAN") {
         if (event.target.getAttribute("data-index") === "allProjects") {
           todoView.displayAllProjectList();
-        } else {
-          const index = findArrayId(getSpanIndex(event.target));
-          const data =
-            todo.getProjectArray()[findArrayId(getSpanIndex(event.target))]
-              .todo;
-
-          todoView.displayTodoList(data, index);
         }
+        const index = findArrayId(getSpanIndex(event.target));
+        const data =
+          todo.getProjectArray()[findArrayId(getSpanIndex(event.target))].todo;
+
+        todoView.displayTodoList(data, index);
       }
     });
   }
