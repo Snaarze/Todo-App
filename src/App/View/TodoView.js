@@ -100,8 +100,7 @@ class TodoView {
       // runs through occupied todos that create card for list of arrays
       for (let j = 0; j < arrayMapped[i].length; j++) {
         const card = document.createElement("div");
-
-        card.setAttribute("data-index", j);
+        card.setAttribute("data-index", arrayMapped[i][j].id);
         card.setAttribute("project-index", i);
 
         card.classList.add(
@@ -211,8 +210,10 @@ class TodoView {
       [index].todo.findIndex(
         (data) => data.id === parseInt(element.getAttribute("data-index"))
       );
+    console.log(subArrayId);
     this.openDialogFunction();
     const array = todo.getProjectArray()[index ? index : 0].todo[subArrayId];
+    console.log(array);
 
     this.htmlCache().title.textContent = `${!array ? 0 : array.title}`;
     this.htmlCache().description.textContent = `Description : ${array.description}`;
