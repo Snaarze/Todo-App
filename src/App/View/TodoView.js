@@ -140,8 +140,14 @@ class TodoView {
     }
   }
   displayTodoList(array, index) {
+    // close the dialog form if it open
+    this.closeDialogFunction();
+
+    // remove all the todo List card
     this.removeChildOfContainerList();
     // stop foreach if the array doesnt have any value
+
+    // checks if the current array is true, then create card.
     if (array) {
       array.forEach((element) => {
         const card = document.createElement("div");
