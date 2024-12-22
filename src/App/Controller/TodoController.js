@@ -50,12 +50,14 @@ class TodoController {
       if (event.target.tagName === "SPAN") {
         if (event.target.getAttribute("data-index") === "allProjects") {
           todoView.displayAllProjectList();
-        }
-        const index = findArrayId(getSpanIndex(event.target));
-        const data =
-          todo.getProjectArray()[findArrayId(getSpanIndex(event.target))].todo;
+        } else {
+          const index = findArrayId(getSpanIndex(event.target));
+          const data =
+            todo.getProjectArray()[findArrayId(getSpanIndex(event.target))]
+              .todo;
 
-        todoView.displayTodoList(data, index);
+          todoView.displayTodoList(data, index);
+        }
       }
     });
   }
