@@ -17,7 +17,6 @@ class TodoList {
 
   updateCurrentId(index) {
     let currentId = JSON.parse(localStorage.getItem("data"))[index ? index : 0];
-
     if (currentId.todo.length === 0) {
       this.id = 0;
       return this.id;

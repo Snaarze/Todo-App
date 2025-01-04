@@ -127,7 +127,6 @@ class TodoView {
         const todoDue = document.createElement("p");
         todoDue.textContent = arrayMapped[i][j].dueDate;
         card.appendChild(todoDue);
-        List.selectedProject(arrayMapped[i][j].id);
         this.htmlCache().todoContainerList.appendChild(card);
       }
     }
