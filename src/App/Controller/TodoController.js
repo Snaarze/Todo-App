@@ -11,12 +11,12 @@ class TodoController {
     const addButton = document.querySelector(".add-btn");
 
     addButton.addEventListener("click", () => {
-      const titleProject = prompt();
-      if (!titleProject)
+      if (!todoView.htmlCache().addNewProject.value)
         return alert("Fields cannot be empty!, Action aborted");
-      todo.createProject(titleProject);
+      todo.createProject(todoView.htmlCache().addNewProject.value);
       todo.updateData();
-      todoView.DisplayProjectList(titleProject);
+      todoView.DisplayProjectList(todoView.htmlCache().addNewProject.value);
+      todoView.htmlCache().addNewProject.value = "";
     });
   }
 

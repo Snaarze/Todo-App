@@ -254,6 +254,7 @@ class TodoView {
     const notes = document.querySelector(".todoNotes");
     const closeDialogBtn = document.querySelector(".closeBtn");
     const AllProjectBtn = document.querySelector(".allProjects");
+    const addNewProject = document.querySelector(".newProject");
     return {
       containerList,
       todoContainerList,
@@ -271,6 +272,7 @@ class TodoView {
       dialogForm,
       closeDialogBtn,
       AllProjectBtn,
+      addNewProject,
     };
   }
 

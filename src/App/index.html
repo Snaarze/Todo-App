@@ -15,12 +15,18 @@
         class="fixed min-h-screen w-[16%] flex flex-col items-center border-r border-gray-200 shadow-2xl project-div"
       >
         <h1 class="font-bold text-3xl my-[1rem]">Todo List</h1>
-        <ul class="project-ul"></ul>
-        <div class="w-full h-8 flex justify-center items-center">
-          <button class="text-base add-btn">
-            <i class="fa-solid fa-plus text-base hover:text-xl"></i>
+        <div class="w-full h-8 flex justify-center items-center gap-5">
+          <input
+            type="text"
+            placeholder="type something here..."
+            class="newProject w-[50%] border border-gray-300 rounded-md ml-2 pl-2 placeholder:text-xs"
+          />
+          <button class="text-xs text-white add-btn bg-green mr-2 px-2 py-1">
+            Add
+            <!-- <i class="fa-solid fa-plus text-base hover:text-xl"></i> -->
           </button>
         </div>
+        <ul class="project-ul"></ul>
       </div>
       <div
         class="todo-list grid grid-cols-4 grid-flow-row-dense auto-rows-[200px] h-full gap-5 pl-80 pr-5 py-10"
