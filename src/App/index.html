@@ -49,5 +49,67 @@
       <p class="todoPriority"></p>
       <p class="todoNotes"></p>
     </dialog>
+
+    <!-- create and update Form -->
+    <dialog
+      class="ProjectForms h-2/4 w-1/4 border border-gray-300 rounded-lg inset-x-0 inset-48 mx-auto bg-white flex-col text-justify"
+    >
+      <div
+        class="w-full bg-green h-10 relative rounded-t-lg justify-center items-center flex"
+      >
+        <p class="text-base text-white font-bold">Forms</p>
+        <button class="closeBtn text-white text-lg font-bold absolute right-2">
+          x
+        </button>
+      </div>
+      <div class="flex flex-col gap-2 mx-10 mt-5">
+        <div class="flex flex-col">
+          <p class="text-xs">Title</p>
+          <input
+            type="text"
+            class="border border-gray-300 rounded-sm pl-2 todoTitleInput"
+          />
+        </div>
+        <div class="flex flex-col">
+          <p class="text-xs">Description</p>
+          <textarea
+            class="border border-gray-300 rounded-sm pl-2 todoDescriptionInput"
+          ></textarea>
+        </div>
+        <div class="flex flex-col">
+          <p class="text-xs">Due</p>
+          <input
+            type="date"
+            class="border border-gray-300 rounded-sm pl-2 todoDueInput"
+          />
+        </div>
+        <div class="flex flex-col">
+          <p class="text-xs">Priority</p>
+          <select
+            name="priority"
+            id="priority"
+            class="border border-gray-300 rounded-sm pl-2 todoPriorityInput"
+          >
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+        </div>
+        <div class="flex flex-col">
+          <p class="text-xs">Notes</p>
+          <textarea
+            class="border border-gray-300 rounded-sm pl-2 todoNotesInput"
+          ></textarea>
+        </div>
+      </div>
+      <div class="flex gap-5 justify-end mt-5 mr-10">
+        <button class="bg-green text-xs px-5 py-2 confirmBtn text-white">
+          Confirm
+        </button>
+        <button class="bg-red text-xs px-5 py-2 cancelBtn text-white">
+          Cancel
+        </button>
+      </div>
+    </dialog>
   </body>
 </html>

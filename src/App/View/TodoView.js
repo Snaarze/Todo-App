@@ -255,6 +255,15 @@ class TodoView {
     const closeDialogBtn = document.querySelector(".closeBtn");
     const AllProjectBtn = document.querySelector(".allProjects");
     const addNewProject = document.querySelector(".newProject");
+    const ProjectForms = document.querySelector(".ProjectForms");
+
+    // adding todo list Forms Selectors
+    const titleInput = document.querySelector(".todoTitleInput");
+    const descriptionInput = document.querySelector(".todoDescriptionInput");
+    const dueInput = document.querySelector(".todoDueInput");
+    const priorityInput = document.querySelector(".todoPriorityInput");
+    const notesInput = document.querySelector(".todoNotesInput");
+    const confirmBtn = document.querySelector(".confirmBtn");
     return {
       containerList,
       todoContainerList,
@@ -273,6 +282,13 @@ class TodoView {
       closeDialogBtn,
       AllProjectBtn,
       addNewProject,
+      ProjectForms,
+      titleInput,
+      descriptionInput,
+      dueInput,
+      priorityInput,
+      notesInput,
+      confirmBtn,
     };
   }
 

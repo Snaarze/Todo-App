@@ -29,12 +29,12 @@ class TodoList {
     this.incrementIdList();
     const newList = new CreateList(
       this.id,
-      prompt("Title"),
-      prompt("Description"),
-      prompt("Due"),
-      prompt("Priority"),
-      prompt("Notes"),
-      prompt("checkList")
+      title,
+      description,
+      dueDate,
+      priority,
+      notes,
+      checklist
     );
 
     // const newList = new CreateList(this.id,title, description, dueDate, priority, notes, checklist);
