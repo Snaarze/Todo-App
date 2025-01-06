@@ -2,6 +2,7 @@ import { ControllerTodo } from "../Controller/TodoController";
 import { listController } from "../Controller/TodoListController";
 import { todo } from "../Model/Todo";
 import { List } from "../Model/todoList";
+import { formatDistanceToNow, isPast } from "date-fns";
 class TodoView {
   constructor() {}
 
@@ -120,14 +121,56 @@ class TodoView {
           card,
           parseInt(card.getAttribute("project-index"))
         );
+
+        // create a todo title and due date
         const todoTitle = document.createElement("p");
         todoTitle.classList.add("text-sm");
         todoTitle.textContent = arrayMapped[i][j].title;
         card.appendChild(todoTitle);
         const todoDue = document.createElement("p");
-        todoDue.textContent = arrayMapped[i][j].dueDate;
         card.appendChild(todoDue);
         this.htmlCache().todoContainerList.appendChild(card);
+        console.log(arrayMapped[i][j].priority);
+
+        // check if the due date of the todo is past
+        if (isPast(arrayMapped[i][j].dueDate)) {
+          card.classList.add(
+            "border-red",
+            "border-dashed",
+            "border-4",
+            "text-black"
+          );
+          todoDue.textContent = `${formatDistanceToNow(
+            arrayMapped[i][j].dueDate
+          )} ago`;
+        }
+        todoDue.textContent = `${formatDistanceToNow(
+          arrayMapped[i][j].dueDate
+        )} left`;
+
+        // change the border color depending on the priority level
+        if (arrayMapped[i][j].priority === "High") {
+          card.classList.add(
+            "border-[#fca5a5]",
+            "border-dashed",
+            "border-4",
+            "text-black"
+          );
+        } else if (arrayMapped[i][j].priority == "Medium") {
+          card.classList.add(
+            "border-[#facc15]",
+            "border-dashed",
+            "border-4",
+            "text-black"
+          );
+        } else if (arrayMapped[i][j].priority === "Low") {
+          card.classList.add(
+            "border-green",
+            "border-dashed",
+            "border-4",
+            "text-black"
+          );
+        }
       }
     }
   }
@@ -138,6 +181,7 @@ class TodoView {
       this.htmlCache().todoContainerList.firstChild.remove();
     }
   }
+
   displayTodoList(array, index) {
     // close the dialog form if it open
     this.closeDialogFunction();
@@ -169,11 +213,47 @@ class TodoView {
         todoTitle.classList.add("text-sm");
         todoTitle.textContent = element.title;
         card.appendChild(todoTitle);
-
         const todoDue = document.createElement("p");
-        todoDue.textContent = element.dueDate;
+
         card.appendChild(todoDue);
         this.htmlCache().todoContainerList.appendChild(card);
+
+        if (isPast(element.dueDate)) {
+          card.classList.add(
+            "border-red",
+            "border-4",
+            "border-dashed",
+            "shadow-inner",
+            "text-black"
+          );
+          todoDue.textContent = `${formatDistanceToNow(element.dueDate)} ago`;
+          return;
+        }
+
+        todoDue.textContent = formatDistanceToNow(element.dueDate);
+
+        if (element.priority === "High") {
+          card.classList.add(
+            "border-[#fca5a5]",
+            "border-dashed",
+            "border-4",
+            "text-black"
+          );
+        } else if (element.priority == "Medium") {
+          card.classList.add(
+            "border-[#facc15]",
+            "border-dashed",
+            "border-4",
+            "text-black"
+          );
+        } else if (element.priority === "Low") {
+          card.classList.add(
+            "border-green",
+            "border-dashed",
+            "border-4",
+            "text-black"
+          );
+        }
       });
       List.selectedProject(index);
     }
