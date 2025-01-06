@@ -44,7 +44,6 @@ class TodoController {
 
   viewTodoList(dataIndex) {
     todo.renderData();
-    console.log(dataIndex);
     todoView.displayTodoList(todo.getProjectArray()[dataIndex].todo, dataIndex);
     // view the todo list depending on the selected row and fetch the todo List.
     todoView.htmlCache().containerList.addEventListener("click", (event) => {

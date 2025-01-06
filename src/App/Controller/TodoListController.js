@@ -28,7 +28,6 @@ class TodoListController {
   }
 
   markCompleteTodo(card, index) {
-    console.log(findArrayTodoId(getSpanIndex(card), index));
     todo.getProjectArray()[index].todo[
       findArrayTodoId(getSpanIndex(card), index)
     ].completed =
@@ -36,6 +35,12 @@ class TodoListController {
         findArrayTodoId(getSpanIndex(card), index)
       ].completed;
     ControllerTodo.viewTodoList(index);
+  }
+
+  markCompleteTodoOnAllProjects(card, index) {
+    todo.getProjectArray()[index].todo[card].completed =
+      !todo.getProjectArray()[index].todo[card].completed;
+    todoView.displayAllProjectList();
   }
 
   clearAddingTodoInput() {

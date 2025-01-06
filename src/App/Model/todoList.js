@@ -8,7 +8,7 @@ class TodoList {
   }
 
   getCurrentId() {
-    return console.log(this.id);
+    return this.id;
   }
 
   selectedProject(index) {

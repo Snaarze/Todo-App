@@ -97,7 +97,6 @@ class TodoView {
 
     // run dynamically that depends on the length of the current array
     for (let i = 0; i < todo.getProjectArray().length; i++) {
-      console.log(arrayMapped[i]);
       // runs through occupied todos that create card for list of arrays
       for (let j = 0; j < arrayMapped[i].length; j++) {
         const card = document.createElement("div");
@@ -106,7 +105,6 @@ class TodoView {
 
         card.classList.add(
           "border",
-          `border-gray-300`,
           "flex",
           "flex-1",
           "flex-col",
@@ -149,8 +147,12 @@ class TodoView {
         markAsCompleteBtn.classList.add("text-white", "bg-black", "px-5");
 
         markAsCompleteBtn.addEventListener("click", (event) => {
+          const card = event.target.closest("div").parentElement;
           event.stopPropagation();
-          listController.markCompleteTodo(card, index);
+          listController.markCompleteTodoOnAllProjects(
+            +card.getAttribute("data-index"),
+            +card.getAttribute("project-index")
+          );
         });
 
         const editBtn = document.createElement("button");
@@ -259,7 +261,6 @@ class TodoView {
         card.setAttribute("data-index", element.id);
         card.classList.add(
           "border",
-          `border-gray-300`,
           "flex",
           "flex-1",
           "flex-col",

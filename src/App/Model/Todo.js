@@ -86,7 +86,7 @@ class Todo {
   }
 
   getCurrentProjectId() {
-    return console.log(this.id);
+    return this.id;
   }
 
   // return the array
