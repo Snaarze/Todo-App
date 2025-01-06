@@ -129,48 +129,61 @@ class TodoView {
         card.appendChild(todoTitle);
         const todoDue = document.createElement("p");
         card.appendChild(todoDue);
+
+        // create 3 buttons for edit, delete, mark as complete
+        // create container for three button
+        const buttonContainer = document.createElement("div");
+        buttonContainer.classList.add(
+          "flex",
+          "gap-3",
+          "justify-end",
+          "items-end",
+          "h-24"
+        );
+
+        // mark button
+        const markAsCompleteBtn = document.createElement("button");
+        markAsCompleteBtn.textContent = arrayMapped[i][j].completed
+          ? "Uncomplete"
+          : "Complete";
+        markAsCompleteBtn.classList.add("text-white", "bg-black", "px-5");
+
+        markAsCompleteBtn.addEventListener("click", (event) => {
+          event.stopPropagation();
+          listController.markCompleteTodo(card, index);
+        });
+
+        const editBtn = document.createElement("button");
+        editBtn.textContent = "Edit";
+        editBtn.classList.add(
+          "text-xs",
+          "bg-green",
+          "py-1",
+          "px-3",
+          "text-white",
+          "edit-btn"
+        );
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.classList.add(
+          "text-xs",
+          "bg-red",
+          "py-1",
+          "px-3",
+          "text-white",
+          "delete-btn"
+        );
+        deleteBtn.textContent = "Delete";
+
+        // append three buttons to container
+        buttonContainer.appendChild(markAsCompleteBtn);
+        buttonContainer.appendChild(editBtn);
+        buttonContainer.appendChild(deleteBtn);
+
+        card.appendChild(buttonContainer);
         this.htmlCache().todoContainerList.appendChild(card);
-        console.log(arrayMapped[i][j].priority);
-
-        // check if the due date of the todo is past
-        if (isPast(arrayMapped[i][j].dueDate)) {
-          card.classList.add(
-            "border-red",
-            "border-dashed",
-            "border-4",
-            "text-black"
-          );
-          todoDue.textContent = `${formatDistanceToNow(
-            arrayMapped[i][j].dueDate
-          )} ago`;
-        }
-        todoDue.textContent = `${formatDistanceToNow(
-          arrayMapped[i][j].dueDate
-        )} left`;
-
-        // change the border color depending on the priority level
-        if (arrayMapped[i][j].priority === "High") {
-          card.classList.add(
-            "border-[#fca5a5]",
-            "border-dashed",
-            "border-4",
-            "text-black"
-          );
-        } else if (arrayMapped[i][j].priority == "Medium") {
-          card.classList.add(
-            "border-[#facc15]",
-            "border-dashed",
-            "border-4",
-            "text-black"
-          );
-        } else if (arrayMapped[i][j].priority === "Low") {
-          card.classList.add(
-            "border-green",
-            "border-dashed",
-            "border-4",
-            "text-black"
-          );
-        }
+        this.changeBorderStyleAndColor(card, arrayMapped[i][j], todoDue);
+        this.changeTextToLineThrough(todoTitle, todoDue, arrayMapped[i][j]);
       }
     }
   }
@@ -179,6 +192,55 @@ class TodoView {
     // remove every child if exist to re-render the items of the array
     while (this.htmlCache().todoContainerList.firstChild) {
       this.htmlCache().todoContainerList.firstChild.remove();
+    }
+  }
+
+  changeBorderStyleAndColor(element, array, content) {
+    if (isPast(array.dueDate)) {
+      element.classList.add(
+        "border-red",
+        "border-4",
+        "border-dashed",
+        "shadow-inner",
+        "text-black"
+      );
+      content.textContent = `${formatDistanceToNow(array.dueDate)} ago`;
+      return;
+    }
+
+    content.textContent = formatDistanceToNow(array.dueDate);
+
+    if (array.priority === "High") {
+      element.classList.add(
+        "border-[#fca5a5]",
+        "border-dashed",
+        "border-4",
+        "text-black"
+      );
+    } else if (array.priority == "Medium") {
+      element.classList.add(
+        "border-[#facc15]",
+        "border-dashed",
+        "border-4",
+        "text-black"
+      );
+    } else if (array.priority === "Low") {
+      element.classList.add(
+        "border-green",
+        "border-dashed",
+        "border-4",
+        "text-black"
+      );
+    }
+  }
+
+  changeTextToLineThrough(title, due, array) {
+    if (array.completed) {
+      title.classList.add("line-through");
+      due.classList.add("line-through");
+    } else if (title.classList.contains("line-through")) {
+      title.classList.remove("line-through");
+      due.classList.remove("line-through");
     }
   }
 
@@ -217,43 +279,59 @@ class TodoView {
 
         card.appendChild(todoDue);
         this.htmlCache().todoContainerList.appendChild(card);
+        this.changeBorderStyleAndColor(card, element, todoDue);
+        this.changeTextToLineThrough(todoTitle, todoDue, element);
+        // create 3 buttons for edit, delete, mark as complete
+        // create container for three button
+        const buttonContainer = document.createElement("div");
+        buttonContainer.classList.add(
+          "flex",
+          "gap-3",
+          "justify-end",
+          "items-end",
+          "h-24"
+        );
 
-        if (isPast(element.dueDate)) {
-          card.classList.add(
-            "border-red",
-            "border-4",
-            "border-dashed",
-            "shadow-inner",
-            "text-black"
-          );
-          todoDue.textContent = `${formatDistanceToNow(element.dueDate)} ago`;
-          return;
-        }
+        // mark button
+        const markAsCompleteBtn = document.createElement("button");
+        markAsCompleteBtn.textContent = element.completed
+          ? "Uncomplete"
+          : "Complete";
+        markAsCompleteBtn.classList.add("text-white", "bg-black", "px-5");
 
-        todoDue.textContent = formatDistanceToNow(element.dueDate);
+        markAsCompleteBtn.addEventListener("click", (event) => {
+          event.stopPropagation();
+          listController.markCompleteTodo(card, index);
+        });
 
-        if (element.priority === "High") {
-          card.classList.add(
-            "border-[#fca5a5]",
-            "border-dashed",
-            "border-4",
-            "text-black"
-          );
-        } else if (element.priority == "Medium") {
-          card.classList.add(
-            "border-[#facc15]",
-            "border-dashed",
-            "border-4",
-            "text-black"
-          );
-        } else if (element.priority === "Low") {
-          card.classList.add(
-            "border-green",
-            "border-dashed",
-            "border-4",
-            "text-black"
-          );
-        }
+        const editBtn = document.createElement("button");
+        editBtn.textContent = "Edit";
+        editBtn.classList.add(
+          "text-xs",
+          "bg-green",
+          "py-1",
+          "px-3",
+          "text-white",
+          "edit-btn"
+        );
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.classList.add(
+          "text-xs",
+          "bg-red",
+          "py-1",
+          "px-3",
+          "text-white",
+          "delete-btn"
+        );
+        deleteBtn.textContent = "Delete";
+
+        // append three buttons to container
+        buttonContainer.appendChild(markAsCompleteBtn);
+        buttonContainer.appendChild(editBtn);
+        buttonContainer.appendChild(deleteBtn);
+
+        card.appendChild(buttonContainer);
       });
       List.selectedProject(index);
     }

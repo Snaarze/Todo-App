@@ -2,7 +2,8 @@ import { todo } from "../Model/Todo";
 import { List } from "../Model/todoList";
 import { todoView } from "../View/TodoView";
 import { ControllerTodo } from "./TodoController";
-
+import { getSpanIndex } from "./TodoController";
+import { findArrayTodoId } from "./TodoController";
 class TodoListController {
   constructor() {
     this.currentArrayed = "";
@@ -24,6 +25,17 @@ class TodoListController {
       todoView.htmlCache().ProjectForms.close();
       ControllerTodo.viewTodoList(this.currentArrayed);
     });
+  }
+
+  markCompleteTodo(card, index) {
+    console.log(findArrayTodoId(getSpanIndex(card), index));
+    todo.getProjectArray()[index].todo[
+      findArrayTodoId(getSpanIndex(card), index)
+    ].completed =
+      !todo.getProjectArray()[index].todo[
+        findArrayTodoId(getSpanIndex(card), index)
+      ].completed;
+    ControllerTodo.viewTodoList(index);
   }
 
   clearAddingTodoInput() {

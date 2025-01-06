@@ -106,4 +106,9 @@ export function findArrayId(btn) {
   return array.findIndex((data) => data.id === btn);
 }
 
+export function findArrayTodoId(btn, index) {
+  const array = todo.getProjectArray();
+  return array[index].todo.findIndex((data) => data.id === btn);
+}
+
 export const ControllerTodo = new TodoController();
