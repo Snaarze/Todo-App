@@ -28,6 +28,7 @@ class TodoController {
     List.getCurrentId();
     todo.getCurrentProjectId();
     listController.addShowModal();
+    listController.confirmEditTodo();
   }
 
   updateProject() {

@@ -1,10 +1,16 @@
-import { ControllerTodo } from "../Controller/TodoController";
+import {
+  ControllerTodo,
+  findArrayTodoId,
+  getSpanIndex,
+} from "../Controller/TodoController";
 import { listController } from "../Controller/TodoListController";
 import { todo } from "../Model/Todo";
 import { List } from "../Model/todoList";
 import { formatDistanceToNow, isPast } from "date-fns";
 class TodoView {
-  constructor() {}
+  constructor() {
+    // this variable will hold the indexes that will determine the array
+  }
 
   DisplayProjectList() {
     // re-render All
@@ -166,6 +172,27 @@ class TodoView {
           "editBtn"
         );
 
+        editBtn.addEventListener("click", (event) => {
+          event.stopPropagation();
+          const array =
+            todo.getProjectArray()[+card.getAttribute("project-index")].todo[
+              findArrayTodoId(
+                getSpanIndex(card),
+                +card.getAttribute("project-index")
+              )
+            ];
+          listController.editShowModal(
+            array,
+            +card.getAttribute("project-index"),
+            card
+          );
+          this.htmlCache().titleInputEdit.value = array.title;
+          this.htmlCache().descriptionInputEdit.value = array.description;
+          this.htmlCache().dueInputEdit.value = array.dueDate;
+          this.htmlCache().priorityInputEdit.value = array.priority;
+          this.htmlCache().notesInputEdit.value = array.notes;
+        });
+
         const deleteBtn = document.createElement("button");
         deleteBtn.classList.add(
           "text-xs",
@@ -176,6 +203,14 @@ class TodoView {
           "deleteBtn"
         );
         deleteBtn.textContent = "Delete";
+
+        deleteBtn.addEventListener("click", (event) => {
+          event.stopPropagation();
+          listController.deleteTodoOnAllProjects(
+            +card.getAttribute("data-index"),
+            +card.getAttribute("project-index")
+          );
+        });
 
         // append three buttons to container
         buttonContainer.appendChild(markAsCompleteBtn);
@@ -210,7 +245,7 @@ class TodoView {
       return;
     }
 
-    content.textContent = formatDistanceToNow(array.dueDate);
+    content.textContent = `${formatDistanceToNow(array.dueDate)} left`;
 
     if (array.priority === "High") {
       element.classList.add(
@@ -316,6 +351,20 @@ class TodoView {
           "edit-btn"
         );
 
+        editBtn.addEventListener("click", (event) => {
+          event.stopPropagation();
+          const array =
+            todo.getProjectArray()[index].todo[
+              findArrayTodoId(getSpanIndex(card), index)
+            ];
+          listController.editShowModal(array, index, card);
+          this.htmlCache().titleInputEdit.value = array.title;
+          this.htmlCache().descriptionInputEdit.value = array.description;
+          this.htmlCache().dueInputEdit.value = array.dueDate;
+          this.htmlCache().priorityInputEdit.value = array.priority;
+          this.htmlCache().notesInputEdit.value = array.notes;
+        });
+
         const deleteBtn = document.createElement("button");
         deleteBtn.classList.add(
           "text-xs",
@@ -418,6 +467,7 @@ class TodoView {
     const AllProjectBtn = document.querySelector(".allProjects");
     const addNewProject = document.querySelector(".newProject");
     const ProjectForms = document.querySelector(".ProjectForms");
+    const editForms = document.querySelector(".EditForms");
 
     // adding todo list Forms Selectors
     const titleInput = document.querySelector(".todoTitleInput");
@@ -426,9 +476,16 @@ class TodoView {
     const priorityInput = document.querySelector(".todoPriorityInput");
     const notesInput = document.querySelector(".todoNotesInput");
     const confirmBtn = document.querySelector(".confirmBtn");
+    // edit Forms Selectors
+    const titleInputEdit = document.querySelector(".todoTitleInputEdit");
+    const descriptionInputEdit = document.querySelector(
+      ".todoDescriptionInputEdit"
+    );
+    const dueInputEdit = document.querySelector(".todoDueInputEdit");
+    const priorityInputEdit = document.querySelector(".todoPriorityInputEdit");
+    const notesInputEdit = document.querySelector(".todoNotesInputEdit");
+    const confirmBtnEdit = document.querySelector(".confirmEditBtn");
 
-    // button selectors
-    const deleteTodoBtn = document.querySelector(".deleteBtn");
     return {
       containerList,
       todoContainerList,
@@ -454,7 +511,13 @@ class TodoView {
       priorityInput,
       notesInput,
       confirmBtn,
-      deleteTodoBtn,
+      editForms,
+      titleInputEdit,
+      descriptionInputEdit,
+      dueInputEdit,
+      priorityInputEdit,
+      notesInputEdit,
+      confirmBtnEdit,
     };
   }
 
