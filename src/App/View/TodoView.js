@@ -163,7 +163,7 @@ class TodoView {
           "py-1",
           "px-3",
           "text-white",
-          "edit-btn"
+          "editBtn"
         );
 
         const deleteBtn = document.createElement("button");
@@ -173,7 +173,7 @@ class TodoView {
           "py-1",
           "px-3",
           "text-white",
-          "delete-btn"
+          "deleteBtn"
         );
         deleteBtn.textContent = "Delete";
 
@@ -326,14 +326,18 @@ class TodoView {
           "delete-btn"
         );
         deleteBtn.textContent = "Delete";
+        deleteBtn.addEventListener("click", (event) => {
+          event.stopPropagation();
+          listController.deleteTodo(card, index);
+        });
 
         // append three buttons to container
         buttonContainer.appendChild(markAsCompleteBtn);
         buttonContainer.appendChild(editBtn);
         buttonContainer.appendChild(deleteBtn);
-
         card.appendChild(buttonContainer);
       });
+
       List.selectedProject(index);
     }
 
@@ -374,7 +378,6 @@ class TodoView {
       [index].todo.findIndex(
         (data) => data.id === parseInt(element.getAttribute("data-index"))
       );
-    console.log(subArrayId);
     this.openDialogFunction();
     const array = todo.getProjectArray()[index ? index : 0].todo[subArrayId];
     console.log(array);
@@ -423,6 +426,9 @@ class TodoView {
     const priorityInput = document.querySelector(".todoPriorityInput");
     const notesInput = document.querySelector(".todoNotesInput");
     const confirmBtn = document.querySelector(".confirmBtn");
+
+    // button selectors
+    const deleteTodoBtn = document.querySelector(".deleteBtn");
     return {
       containerList,
       todoContainerList,
@@ -448,6 +454,7 @@ class TodoView {
       priorityInput,
       notesInput,
       confirmBtn,
+      deleteTodoBtn,
     };
   }
 

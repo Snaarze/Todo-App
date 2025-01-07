@@ -43,6 +43,13 @@ class TodoListController {
     todoView.displayAllProjectList();
   }
 
+  deleteTodo(card, index) {
+    todo
+      .getProjectArray()
+      [index].todo.splice(findArrayTodoId(getSpanIndex(card), index), 1);
+    ControllerTodo.viewTodoList(index);
+  }
+
   clearAddingTodoInput() {
     todoView.htmlCache().titleInput.value =
       todoView.htmlCache().descriptionInput.value =
